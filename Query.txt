@@ -1,0 +1,103 @@
+1.
+SELECT physician_last, physician_first, building_name 
+FROM physician
+RIGHT JOIN building ON physician.BUILDING_NUMBER = building.BUILDING_NUMBER
+WHERE physician.building_number < 3;
+2. 
+SELECT patient_last, patient_first, insurance_type 
+FROM patient 
+RIGHT JOIN insurance ON patient.insurance_number = insurance.insurance_number
+WHERE patient.insurance_number IS NOT NULL;
+
+3.
+CREATE TABLE waiting_list (
+waiting_list_ID DECIMAL (10) NOT NULL, 
+patient_ID DECIMAL (10) NOT NULL,
+time TIMESTAMP (3)  NOT NULL,
+queue_order DECIMAL (10),
+PRIMARY KEY (waiting_list_ID),
+FOREIGN KEY (patient_ID) REFERENCES patient);
+
+BEGIN 
+ADD_PATIENT (1234,005, timestamp '2016-12-20 09:30:00', 3);
+END;
+/
+
+4.
+The list of physicians that does not treat first patient. 
+SELECT d.physician_first, d.physician_last       
+FROM        Patient p
+LEFT JOIN physician d
+ON          d.physician_id = P.physician_id
+WHERE P.patient_id != 001;
+
+5.
+
+CREATE OR REPLACE PROCEDURE ADD_LATEPAYMENT( -- Create a new late fee payment
+invoice_number IN DECIMAL,
+insurance_number IN DECIMAL ,
+patient_ID IN DECIMAL,
+Description IN VARCHAR,
+amount IN DECIMAL)
+IS -- Required by the syntax, but it doesn’t do anything in particular
+BEGIN
+ INSERT INTO invoice
+ (invoice_number,insurance_number,patient_id,description, amount)
+ VALUES(invoice_number,insurance_number,patient_id,description, amount);
+END;
+
+--Invoke
+BEGIN
+ ADD_LATEPAYMENT(660022,56612,001,'Late fee',300 );
+END;
+/
+
+
+6.
+CREATE OR REPLACE PROCEDURE UPDATE_PATIENT (
+patient_id_arg IN DECIMAL
+)
+AS
+BEGIN
+    UPDATE patient
+    SET insurance_number = NULL  
+    WHERE patient_id_arg = patient_id;
+END;
+/
+
+--Update
+EXECUTE UPDATE_PATIENT (002);
+7. 
+SELECT physician_first, physician_last
+FROM physician p
+JOIN appointment a 
+ON p.physician_id = a.physician_id
+WHERE a.availability = 'n';
+
+8.
+SELECT i.insurance_type, i.copay_amount,
+COUNT (p.patient_id) AS number_of_enrollees
+FROM insurance i
+JOIN patient p 
+ON i.insurance_number = p.insurance_number
+GROUP BY i.insurance_type, i.copay_amount
+HAVING COUNT (p.patient_id) >1;
+
+9. 
+SELECT p.patient_last, p.patient_first,
+       ph.physician_last, ph.physician_first,
+       COUNT (v.patient_id) AS nr_of_visits
+FROM patient p
+JOIN physician ph ON p.physician_id = ph.physician_id 
+JOIN visits v ON v.patient_id = ph.patient_id
+GROUP BY  p.patient_last, p.patient_first,
+       ph.physician_last, ph.physician_first
+HAVING COUNT (v.patient_id) >  1;
+
+10. 
+SELECT ph.physician_first, ph.physician_last,  
+      COUNT (DISTINCT v.patient_id) AS nr_of_patients
+FROM physician ph
+JOIN visits v ON ph.physician_id = v.physician_id 
+GROUP BY ph.physician_last, ph.physician_first
+ORDER BY nr_of_patients DESC;

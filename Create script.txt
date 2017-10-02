@@ -1,0 +1,94 @@
+CREATE TABLE Hospital (
+hospital_id DECIMAL(10) NOT NULL,
+Hospital_name VARCHAR (250) NOT NULL,
+PRIMARY KEY (hospital_id));
+
+CREATE TABLE building (
+building_number DECIMAL (10) NOT NULL,
+building_name VARCHAR (30) NOT NULL,
+hospital_id DECIMAL(10) NOT NULL,
+PRIMARY KEY (building_number),
+FOREIGN KEY (hospital_id) references hospital);
+
+CREATE TABLE department (
+department_id DECIMAL(10) NOT NULL,
+building_number DECIMAL (10) NOT NULL,
+description VARCHAR (200),
+PRIMARY KEY (department_id), 
+FOREIGN KEY (building_number) REFERENCES building);
+
+CREATE TABLE diagnosis (
+diagnosis_number VARCHAR(40) NOT NULL,
+diagnosis_name VARCHAR (222) NOT NULL,
+description VARCHAR (222),
+PRIMARY KEY (diagnosis_number));
+
+CREATE TABLE insurance (
+insurance_number DECIMAL (10) NOT NULL,
+insurance_type VARCHAR (200) NOT NULL,
+copay_amount DECIMAL (12,2),
+PRIMARY KEY (insurance_number));
+
+CREATE TABLE physician(
+physician_ID DECIMAL(10) NOT NULL,
+physician_first VARCHAR(30) NOT NULL,
+physician_last VARCHAR(40) NOT NULL,
+department_ID DECIMAL(10) NOT NULL,
+diagnosis_number VARCHAR(40) NOT NULL,
+patient_ID DECIMAL (10) NOT NULL,
+building_number DECIMAL (10) NOT NULL,
+PRIMARY KEY (physician_ID),
+FOREIGN KEY (building_number) REFERENCES building,
+FOREIGN KEY (department_id) REFERENCES department, 
+FOREIGN KEY (diagnosis_number) REFERENCES diagnosis);
+
+
+CREATE TABLE patient (
+patient_id DECIMAL (10) NOT NULL, 
+physician_id DECIMAL (10) NOT NULL, 
+diagnosis_number VARCHAR(40) NOT NULL,
+insurance_number DECIMAL (10),
+patient_last VARCHAR (100) NOT NULL,
+patient_first VARCHAR (100) NOT NULL, 
+patient_dob DATE NOT NULL, 
+PRIMARY KEY (patient_id), 
+FOREIGN KEY (physician_id) REFERENCES physician, 
+FOREIGN KEY (insurance_number) REFERENCES insurance,
+FOREIGN KEY (diagnosis_number) REFERENCES diagnosis);
+
+
+CREATE TABLE Visits (
+    visit_id DECIMAL (10) NOT NULL,
+    patient_ID DECIMAL (10) NOT NULL,
+    physician_ID DECIMAL(10) NOT NULL,
+    visit_day DATE NOT NULL ,
+    primary key (visit_id),
+    FOREIGN KEY (patient_ID) references Patient (patient_ID) ,
+    FOREIGN KEY (physician_ID)references physician (physician_ID));
+
+CREATE TABLE waiting_list (
+waiting_list_ID DECIMAL (10) NOT NULL, 
+patient_ID DECIMAL (10) NOT NULL,
+time TIMESTAMP (3)  NOT NULL,
+queue_order DECIMAL (10),
+PRIMARY KEY (waiting_list_ID),
+FOREIGN KEY (patient_ID) REFERENCES patient);
+
+CREATE TABLE invoice (
+invoice_number DECIMAL (10) NOT NULL,
+insurance_number DECIMAL (10),
+patient_ID DECIMAL (10) NOT NULL,
+Description VARCHAR (250),
+amount DECIMAL (12,2) NOT NULL,
+PRIMARY KEY (invoice_number),
+FOREIGN KEY (patient_ID) REFERENCES patient,
+FOREIGN KEY (insurance_number) REFERENCES insurance);
+
+CREATE TABLE Appointment (
+appointment_number DECIMAL (12) NOT NULL, 
+physician_ID DECIMAL(10) NOT NULL,
+patient_ID DECIMAL (10),
+availability VARCHAR (1) NOT NULL,
+primary key (appointment_number),
+foreign key (patient_ID) references Patient (patient_ID) ,
+foreign key (physician_ID)references physician (physician_ID));

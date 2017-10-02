@@ -1,0 +1,109 @@
+INSERT INTO Hospital VALUES (100000, 'Mercy Hospital');
+
+
+INSERT INTO building VALUES(01,'Agnes', 100000);
+INSERT INTO building VALUES(02,'Palladius', 100000);
+INSERT INTO building VALUES(03,'Patrick', 100000);
+
+INSERT INTO department (department_id, building_number, description)
+VALUES (801,01, 'General Surgery');
+INSERT INTO department (department_id, building_number, description)
+VALUES (802,02, 'Haematology');
+INSERT INTO department (department_id, building_number, description)
+VALUES (803,03, 'Occupational Therapy');
+INSERT INTO department (department_id, building_number, description)
+VALUES (804,03, 'Oncology');
+INSERT INTO department (department_id, building_number, description)
+VALUES (805,03, 'Crohns Disease');
+
+INSERT INTO diagnosis VALUES (01,'Acromegaly', NULL);
+INSERT INTO diagnosis VALUES (02,'Lupus', NULL);
+INSERT INTO diagnosis VALUES (03,'Kaposi sarcoma', NULL);
+INSERT INTO diagnosis VALUES (04,'H1N1 influenza', NULL);
+INSERT INTO diagnosis VALUES (05,'Jabs syndrome', NULL);
+
+INSERT INTO insurance VALUES (56612, 'Health Maintenance Organization plans', 20);
+INSERT INTO insurance VALUES (56613, 'Preferred Provider Organization plans', 40);
+INSERT INTO insurance VALUES (56614, 'Exclusive Provider Organization plans', 50);
+INSERT INTO insurance VALUES (56615, 'Point of Service Plans', 60);
+INSERT INTO insurance VALUES (56616, 'High Deductible Health Plan Plans', 70);
+
+INSERT INTO physician VALUES(1,'John','Smith',801,01,001, 01);
+INSERT INTO physician VALUES(2,'Mary','Berman', 801, 02, 0002, 02);
+INSERT INTO physician VALUES(3,'Elizabeth','Johnson', 802,02, 0003, 03);
+INSERT INTO physician VALUES(4,'Peter','Quigley', 802, 03, 0004, 01);
+INSERT INTO physician VALUES(5,'Stanton','Hurley', 803, 04, 0005, 02);
+INSERT INTO physician VALUES(6,'Yvette','Presley', 803, 05, 0006, 02);
+INSERT INTO physician VALUES(7,'Hilary','Marsh', 804, 05, 0007, 01);
+INSERT INTO physician VALUES(8,'Aaron','Lee', 804, 02, 0007, 01);
+INSERT INTO physician VALUES(9,'Daniel','Williams', 805, 04, 0007, 01);
+INSERT INTO physician VALUES(10,'Maria','Lopez', 805, 03, 0007, 01);
+INSERT INTO physician VALUES(11,'Eric','Sim', 801, 01, 0007, 01);
+
+
+INSERT INTO patient VALUES (001, 1, 01, 56612, 'Anderson', 'Ronald', CAST('18-DEC-1950' AS DATE));
+INSERT INTO patient VALUES (002, 2, 02, NULL, 'Baker', 'Hellen', CAST('06-MAR-1972' AS DATE));
+INSERT INTO patient VALUES (004, 3, 02, NULL, 'Gonzalez', 'Kenneth', CAST('23-DEC-1987' AS DATE));
+INSERT INTO patient VALUES (005, 4, 03, 56614, 'Collins', 'George', CAST('01-MAY-1963' AS DATE));
+INSERT INTO patient VALUES (006, 5, 04, 56615, 'Evans', 'William', CAST('30-JUL-1990' AS DATE));
+INSERT INTO patient VALUES (007, 6, 05, NULL, 'Turner', 'Antonia', CAST('22-FEB-1989' AS DATE));
+INSERT INTO patient VALUES (008, 7, 05, 56616, 'Wright', 'Jacob', CAST('09-AUG-1949' AS DATE));
+INSERT INTO patient VALUES (009, 9, 02, 56612, 'Levi', 'Samuel', CAST('6-APR-1982' AS DATE));
+INSERT INTO patient VALUES (0010, 10, 03, 56615, 'Binder', 'Kelly', CAST('18-MAY-1976' AS DATE));
+INSERT INTO patient VALUES (0011, 11, 04, 56614, 'Bryce', 'Brandon', CAST('1-JAN-1991' AS DATE));
+
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES 
+    ( 300, 004, 1, CAST('12-DEC-2016' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES 
+    ( 301, 004, 2, CAST('12-DEC-2016' AS DATE) );
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 302, 004, 2, CAST('02-JAN-2016' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 303, 002, 2, CAST('17-SEP-2016' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 311, 002, 4, CAST('17-SEP-2016' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 304, 005, 5, CAST('12-DEC-2015' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 312, 002, 5, CAST('13-JUN-2016' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 314, 002, 6, CAST('13-JAN-2015' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 313, 002, 7, CAST('13-JAN-2015' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 305, 004, 5, CAST('10-OCT-2015' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 306, 001, 1, CAST('12-JAN-2016' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 316, 004, 7, CAST('18-MAY-2016' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 307, 002, 1, CAST('12-JUL-2016' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 315, 005, 7, CAST('12-JUL-2016' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 310, 004, 3, CAST('10-APR-2016' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 308, 005, 5, CAST('12-DEC-2015' AS DATE));
+INSERT INTO Visits (visit_id , patient_ID , physician_ID , visit_day) VALUES
+    ( 309, 005, 2, CAST('12-DEC-2016' AS DATE));
+
+INSERT INTO Appointment (appointment_number, physician_id, patient_ID, availability)
+VALUES (1234, 1, NULL, 'y');
+INSERT INTO Appointment (appointment_number, physician_id, patient_ID, availability)
+VALUES (1235, 2, 002, 'n');
+INSERT INTO Appointment (appointment_number, physician_id, patient_ID, availability)
+VALUES (1236, 3, 004, 'n');
+INSERT INTO Appointment (appointment_number, physician_id, patient_ID, availability )
+VALUES (1237, 4, 004, 'n');
+INSERT INTO Appointment (appointment_number, physician_id, patient_ID, availability )
+VALUES (1238, 5, NULL, 'y');
+INSERT INTO Appointment (appointment_number, physician_id, patient_ID, availability )
+VALUES (1239, 7, 006, 'n');
+INSERT INTO Appointment (appointment_number, physician_id, patient_ID, availability )
+VALUES (1240, 8, 007, 'n');
+INSERT INTO Appointment (appointment_number, physician_id, patient_ID, availability )
+VALUES (1242, 9, 009, 'n');
+INSERT INTO Appointment (appointment_number, physician_id, patient_ID, availability )
+VALUES (1243, 10, 010, 'n');
+INSERT INTO Appointment (appointment_number, physician_id, patient_ID, availability )
+VALUES (1244, 11, 011, 'n');
